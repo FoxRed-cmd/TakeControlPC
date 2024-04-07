@@ -1,0 +1,127 @@
+﻿<Window x:Class="TakeControlPC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:local="clr-namespace:TakeControlPC"
+        mc:Ignorable="d"
+         Title="TakeControl" Height="190" Width="415"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#3F51B5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="InnerBorder"
+                            Background="#3F51B5"
+                            BorderThickness="0" 
+                            CornerRadius="5">
+                            <ContentPresenter 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Margin="24 8"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"
+                                        TargetName="InnerBorder" Value="#5A6CD6"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background"
+                                    TargetName="InnerBorder" Value="#303F9F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#3F51B5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <WrapPanel VerticalAlignment="Top" Margin="0,0,0,0" Grid.Row="0" Height="36" MouseDown="WrapPanel_MouseDown">
+            <TextBlock Text="Take control PC"
+                       FontSize="18"
+                       Margin="10 7 0 0"
+                       Width="322"
+                       FontFamily="Yu Gothic UI Semibold"
+                       Foreground="White"/>
+            <fa5:FontAwesome Icon="Solid_Wrench"
+                 Foreground="White" 
+                 FontSize="18"
+                 Margin="0 7 10 0"
+                 Cursor="Hand" MouseLeftButtonDown="FontAwesome_MouseLeftButtonDown"/>
+            <fa5:FontAwesome Icon="Solid_Minus"
+                 Foreground="White" 
+                 FontSize="18"
+                 Margin="0 7 10 0"
+                 Cursor="Hand" MouseLeftButtonDown="Hide_MouseLeftButtonDown"/>
+            <fa5:FontAwesome Icon="Solid_PowerOff"
+                 Foreground="White" 
+                 FontSize="18"
+                 Margin="0 7 0 0"
+                 Cursor="Hand" MouseLeftButtonDown="Exit_MouseLeftButtonDown"/>
+        </WrapPanel>
+        <StackPanel Grid.Row="1"
+                    Background="#212121">
+            <WrapPanel Margin="0 10 0 20">
+                <TextBlock Text="Port:"
+                           FontFamily="Yu Gothic UI Semibold"
+                           Foreground="White"
+                           FontSize="18"
+                           Margin="10 0 100 0"
+                           Width="95"/>
+                <TextBox x:Name="txtPort"
+                         Text="5000"
+                         MinWidth="200"
+                         Padding="5">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </WrapPanel>
+            <WrapPanel>
+                <ComboBox x:Name="adaptersBox"
+                           FontFamily="Yu Gothic UI Semibold"
+                           FontSize="18"
+                           Margin="10 0"
+                           Width="185">
+                </ComboBox>
+                <TextBox x:Name="txtIP"
+                         Text="192.168.0.1"
+                         MinWidth="200"
+                         Padding="5">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </WrapPanel>
+        </StackPanel>
+        <Grid Grid.Row="3"
+              Background="#212121">
+            <Button x:Name="btnStart"
+                    Content="Start"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="10"
+                    Style="{StaticResource ButtonStyle}"
+                    Background="#3F51B5"
+                    Foreground="White"
+                    Padding="30 5" Click="ButtonStartStop_Click" BorderBrush="{x:Null}">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
